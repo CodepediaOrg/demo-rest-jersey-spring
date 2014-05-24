@@ -1,0 +1,23 @@
+<Context>
+  <Resource
+	   name="jdbc/restDemoDB"
+	   auth="Container"
+	   type="javax.sql.DataSource"
+	   factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+	   initialSize="5"
+	   maxActive="55"
+	   maxIdle="21"
+	   minIdle="13"
+	   timeBetweenEvictionRunsMillis="34000"
+	   minEvictableIdleTimeMillis="55000"
+	   validationQuery="SELECT 1"
+	   validationInterval="34"
+	   testOnBorrow="true"
+	   removeAbandoned="true"
+	   removeAbandonedTimeout="233"
+	   username="rest_demo"
+	   password="rest_demo"
+	   driverClassName="com.mysql.jdbc.Driver"
+	   url="jdbc:mysql://localhost:3307/rest_demo?allowMultiQueries=true"
+   /> 
+</Context>

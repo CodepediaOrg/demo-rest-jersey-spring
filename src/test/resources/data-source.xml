@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Application context definition for PetClinic Datasource.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:p="http://www.springframework.org/schema/p"
+		xmlns:context="http://www.springframework.org/schema/context" 
+		xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+			http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+				
+  	<!-- ========================= DATASOURCE DEFINITION ========================= -->		
+	   <!-- pcm-data.xml -->	
+	 	 <!-- When resourceRef is true, the value of jndiName will be prepended with
+	server’s JNDI directory. Consequently, the actual name used will be
+	java:comp/env/jdbc/pcmDB. 
+	<bean id="dataSource"
+		class="org.springframework.jndi.JndiObjectFactoryBean"
+		scope="singleton">
+		<property name="jndiName" value="jdbc/pcmDB" />
+		<property name="resourceRef" value="true" />		
+	</bean> 
+	-->
+	
+	<!-- Configurer that replaces ${...} placeholders with values from a properties file -->
+	<!-- (in this case, JDBC-related settings for the dataSource definition below) -->
+	<context:property-placeholder location="classpath:db.properties"/>
+		
+	<bean id="dataSource" destroy-method="close"
+	  class="org.apache.commons.dbcp.BasicDataSource">
+	    <property name="driverClassName" value="${db.driver}"/>
+	    <property name="url" value="${db.url}"/>
+	    <property name="username" value="${db.username}"/>
+	    <property name="password" value="${db.password}"/>
+	    <property name="initialSize" value="3"/>
+        <property name="testWhileIdle" value="true" />
+        <property name="timeBetweenEvictionRunsMillis" value="300000" />
+        <property name="numTestsPerEvictionRun" value="6" />
+        <property name="minEvictableIdleTimeMillis" value="1800000" />
+        <property name="maxActive" value="5" />
+        <property name="maxIdle" value="5" />
+        <property name="maxWait" value="5000" />
+        <property name="poolPreparedStatements" value="true" />
+        <property name="maxOpenPreparedStatements" value="10" />	    
+	</bean>	
+	
+	<bean id="configDataSource" destroy-method="close"
+	  class="org.apache.commons.dbcp.BasicDataSource">
+	    <property name="driverClassName" value="${db.driver}"/>
+	    <property name="url" value="${db.url}"/>
+	    <property name="username" value="${db.username}"/>
+	    <property name="password" value="${db.password}"/>
+	    <property name="initialSize" value="3"/>
+        <property name="testWhileIdle" value="true" />
+        <property name="timeBetweenEvictionRunsMillis" value="300000" />
+        <property name="numTestsPerEvictionRun" value="6" />
+        <property name="minEvictableIdleTimeMillis" value="1800000" />
+        <property name="maxActive" value="5" />
+        <property name="maxIdle" value="5" />
+        <property name="maxWait" value="5000" />
+        <property name="poolPreparedStatements" value="true" />
+        <property name="maxOpenPreparedStatements" value="10" />	    
+	</bean>	
+
+</beans>

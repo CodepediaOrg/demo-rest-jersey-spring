@@ -1,0 +1,53 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"	
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans	
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+	 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx.xsd
+		 
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd">
+ 
+	<context:component-scan base-package="org.codingpedia.demo.rest.*" />
+    
+    <!-- import the dataSource definition -->
+    <import resource="data-source.xml"/> 
+     
+	<!--
+		Instruct Spring to perform declarative transaction management
+		automatically on annotated classes.
+	-->	
+	<tx:annotation-driven transaction-manager="transactionManager" />  
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>  
+    	
+	<!-- =============== MyBATIS beans configuration ================== -->
+	<bean id="podcastDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	   <property name="sqlSessionFactory" ref="sqlSessionFactory"/>    
+	   <property name="mapperInterface" value="org.codingpedia.demo.rest.dao.PodcastDao" />
+	</bean>
+	
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	    <property name="dataSource" ref="dataSource" />
+	    <property name="configLocation" value="classpath:config/mybatisV3.xml"/>
+	</bean>
+	
+    <bean id="podcastResource" class="org.codingpedia.demo.rest.resource.PodcastResource" >
+    	<property name="podcastService" ref="podcastService"/>
+    </bean>
+    
+    <bean id="podcastService" class="org.codingpedia.demo.rest.service.PodcastServiceDbAccessImpl" >
+    	<property name="podcastDao" ref="podcastDao"/>
+    </bean>    
+    
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean" scope="singleton">
+	    <property name="jndiName" value="java:comp/env/jdbc/restDemoDB" />
+	    <property name="resourceRef" value="true" />        
+	</bean>
+</beans>
