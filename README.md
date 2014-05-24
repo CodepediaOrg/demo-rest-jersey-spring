@@ -8,7 +8,6 @@ Prerequisites:
 
 Install
 --
-Create db schema by executing https://github.com/amacoder/demo-restWS-spring-jersey-jpa2-hibernate/blob/master/src/main/resources/input_data/DumpRESTdemoDB.sql against the MySQL database
 
 Run the example
 --
@@ -18,6 +17,3 @@ Run the example
 
 Go to blog post
 --
-Visit 
-http://www.codingpedia.org/ama/java-persistence-example-with-spring-jpa2-and-hibernate/
-for the explanation of the code
