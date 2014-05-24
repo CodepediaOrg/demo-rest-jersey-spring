@@ -13,28 +13,33 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.spring.scope.RequestContextFilter;
 
 /**
- * Registers the components to be used by the JAX-RS application  
+ * Registers the components to be used by the JAX-RS application
  * 
  * @author ama
- *
+ * 
  */
 public class RestDemoJaxRsApplication extends ResourceConfig {
 
-    /**
-	* Register JAX-RS application components.
-	*/	
-	public RestDemoJaxRsApplication(){
-		register(RequestContextFilter.class);
+	/**
+	 * Register JAX-RS application components.
+	 */
+	public RestDemoJaxRsApplication() {
+		// register application resources
 		register(PodcastResource.class);
 		register(PodcastLegacyResource.class);
+
+		// register filters
+		register(RequestContextFilter.class);
+		register(LoggingResponseFilter.class);
+		register(CORSResponseFilter.class);
+
+		// register exception mappers
 		register(GenericExceptionMapper.class);
 		register(AppExceptionMapper.class);
 		register(NotFoundExceptionMapper.class);
-		register(LoggingResponseFilter.class);
-		register(CORSResponseFilter.class);
-		
-		//register features
-		register(JacksonFeature.class);	
+
+		// register features
+		register(JacksonFeature.class);
 		register(MultiPartFeature.class);
 	}
 }
