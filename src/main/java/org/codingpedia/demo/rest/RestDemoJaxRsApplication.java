@@ -6,7 +6,7 @@ import org.codingpedia.demo.rest.errorhandling.NotFoundExceptionMapper;
 import org.codingpedia.demo.rest.filters.CORSResponseFilter;
 import org.codingpedia.demo.rest.filters.LoggingResponseFilter;
 import org.codingpedia.demo.rest.resource.PodcastLegacyResource;
-import org.codingpedia.demo.rest.resource.PodcastResource;
+import org.codingpedia.demo.rest.resource.PodcastsResource;
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -25,7 +25,7 @@ public class RestDemoJaxRsApplication extends ResourceConfig {
 	 */
 	public RestDemoJaxRsApplication() {
 		// register application resources
-		register(PodcastResource.class);
+		register(PodcastsResource.class);
 		register(PodcastLegacyResource.class);
 
 		// register filters

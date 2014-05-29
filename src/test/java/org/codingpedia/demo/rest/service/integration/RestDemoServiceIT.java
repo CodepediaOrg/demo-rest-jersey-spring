@@ -14,7 +14,7 @@ import javax.ws.rs.core.Response;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.codingpedia.demo.rest.dao.PodcastEntity;
+import org.codingpedia.demo.rest.resource.Podcast;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.junit.Assert;
@@ -40,8 +40,8 @@ public class RestDemoServiceIT {
 		Response response = request.get();
 		Assert.assertTrue(response.getStatus() == 200);
 
-		List<PodcastEntity> podcasts = response
-				.readEntity(new GenericType<List<PodcastEntity>>() {
+		List<Podcast> podcasts = response
+				.readEntity(new GenericType<List<Podcast>>() {
 				});
 
 		ObjectMapper mapper = new ObjectMapper();
@@ -53,7 +53,7 @@ public class RestDemoServiceIT {
 	}
 
 	@Test
-	public void testGetLegacyPodcast() throws JsonGenerationException,
+	public void testGetPodcast() throws JsonGenerationException,
 			JsonMappingException, IOException {
 
 		ClientConfig clientConfig = new ClientConfig();
@@ -69,7 +69,7 @@ public class RestDemoServiceIT {
 		Response response = request.get();
 		Assert.assertTrue(response.getStatus() == 200);
 
-		PodcastEntity podcast = response.readEntity(PodcastEntity.class);
+		Podcast podcast = response.readEntity(Podcast.class);
 
 		ObjectMapper mapper = new ObjectMapper();
 		System.out
@@ -97,8 +97,8 @@ public class RestDemoServiceIT {
 		Response response = request.get();
 		Assert.assertTrue(response.getStatus() == 200);
 
-		List<PodcastEntity> podcasts = response
-				.readEntity(new GenericType<List<PodcastEntity>>() {
+		List<Podcast> podcasts = response
+				.readEntity(new GenericType<List<Podcast>>() {
 				});
 
 		ObjectMapper mapper = new ObjectMapper();
@@ -110,7 +110,7 @@ public class RestDemoServiceIT {
 	}
 
 	@Test
-	public void testGetPodcast() throws JsonGenerationException,
+	public void testGetLegacyPodcast() throws JsonGenerationException,
 			JsonMappingException, IOException {
 
 		ClientConfig clientConfig = new ClientConfig();
@@ -126,7 +126,7 @@ public class RestDemoServiceIT {
 		Response response = request.get();
 		Assert.assertTrue(response.getStatus() == 200);
 
-		PodcastEntity podcast = response.readEntity(PodcastEntity.class);
+		Podcast podcast = response.readEntity(Podcast.class);
 
 		ObjectMapper mapper = new ObjectMapper();
 		System.out

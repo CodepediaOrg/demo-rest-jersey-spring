@@ -49,7 +49,7 @@
     	
 	<bean id="podcastDao" class="org.codingpedia.demo.rest.dao.PodcastDaoJPA2Impl"/>	
     <bean id="podcastService" class="org.codingpedia.demo.rest.service.PodcastServiceDbAccessImpl" />	
-    <bean id="podcastResource" class="org.codingpedia.demo.rest.resource.PodcastResource" />
+    <bean id="podcastsResource" class="org.codingpedia.demo.rest.resource.PodcastsResource" />
     <bean id="podcastLegacyResource" class="org.codingpedia.demo.rest.resource.PodcastLegacyResource" />
     
 	<bean id="restDemoDS" class="org.springframework.jndi.JndiObjectFactoryBean" scope="singleton">

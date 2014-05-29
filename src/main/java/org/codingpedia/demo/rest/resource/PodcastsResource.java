@@ -33,7 +33,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Component
 @Path("/podcasts")
-public class PodcastResource {
+public class PodcastsResource {
 
 	@Autowired
 	private PodcastService podcastService;
@@ -52,17 +52,11 @@ public class PodcastResource {
 	 */
 	@POST
 	@Consumes({ MediaType.APPLICATION_JSON })
-	// TODO server say what it accepts, client mention accept header
 	@Produces({ MediaType.TEXT_HTML })
 	public Response createPodcast(Podcast podcast) throws AppException {
 		Long createPodcastId = podcastService.createPodcast(podcast);
-		// TODO add location header where it was created... very important to
-		// tell the client to interact with this location further
-		// TODO you can don't what you want with it on the server because is not
-		// idempotent.
-		// POST for partial update.... (to send only some fields to reduce
-		// bandwidth....)
-		return Response.status(Response.Status.CREATED)// 201
+		return Response.status(Response.Status.CREATED)
+				// 201
 				.entity("A new podcast has been created")
 				.header("Location",
 						"http://localhost:8888/demo-rest-jersey-spring/podcasts/"
@@ -95,7 +89,8 @@ public class PodcastResource {
 		Long createPodcastid = podcastService.createPodcast(podcast);
 
 		return Response
-				.status(Response.Status.CREATED)// 201
+				.status(Response.Status.CREATED)
+				// 201
 				.entity("A new podcast/resource has been created at /demo-rest-jersey-spring/podcasts/"
 						+ createPodcastid)
 				.header("Location",
@@ -159,13 +154,12 @@ public class PodcastResource {
 	/*
 	 * *********************************** UPDATE ***********************************
 	 */
+
 	/**
-	 * Updates the attributes of the podcast received via JSON for the given @param
-	 * id
-	 * 
-	 * If the podcast does not exist yet in the database (verified by
-	 * <strong>id</strong>) then the application will try to create a new
-	 * podcast resource in the db
+	 * The method offers both Creation and Update resource functionality. If
+	 * there is no resource yet at the specified location, then a podcast
+	 * creation is executed and if there is then the resource will be full
+	 * updated.
 	 * 
 	 * @param id
 	 * @param podcast
@@ -176,59 +170,51 @@ public class PodcastResource {
 	@Path("{id}")
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Produces({ MediaType.TEXT_HTML })
-	public Response putPodcastById(@PathParam("id") Long id,
-			Podcast podcast) throws AppException {
-		
+	public Response putPodcastById(@PathParam("id") Long id, Podcast podcast)
+			throws AppException {
+
 		Podcast podcastById = podcastService.verifyPodcastExistenceById(id);
-		
-		if(podcastById == null){
-			//resource not existent yet, and should be created under the specified URI
+
+		if (podcastById == null) {
+			// resource not existent yet, and should be created under the
+			// specified URI
 			Long createPodcastId = podcastService.createPodcast(podcast);
-			return Response.status(Response.Status.CREATED)// 201
+			return Response
+					.status(Response.Status.CREATED)
+					// 201
 					.entity("A new podcast has been created AT THE LOCATION you specified")
 					.header("Location",
 							"http://localhost:8888/demo-rest-jersey-spring/podcasts/"
 									+ String.valueOf(createPodcastId)).build();
 		} else {
-			//resource is existent and a full update should occur 
+			// resource is existent and a full update should occur
 			podcastService.updateFullyPodcast(podcast);
-			return Response.status(Response.Status.OK)// 200
+			return Response
+					.status(Response.Status.OK)
+					// 200
 					.entity("The podcast you specified has been fully updated created AT THE LOCATION you specified")
 					.header("Location",
 							"http://localhost:8888/demo-rest-jersey-spring/podcasts/"
-									+ String.valueOf(id)).build();			
+									+ String.valueOf(id)).build();
 		}
-
-		//TODO - add this to the post "id should be present both in the URI and in the content to be conform with the standard"
-
-		// status = 200; // OK
-		// message = "Podcast has been updated";
-		// } else {
-		// status = 406; // Not acceptable
-		// message =
-		// "The information you provided is not sufficient to perform either an UPDATE or "
-		// + " an INSERTION of the new podcast resource <br/>"
-		// +
-		// " If you want to UPDATE please make sure you provide an existent <strong>id</strong> <br/>"
-		// +
-		// " If you want to insert a new podcast please provide at least a <strong>title</strong> and the <strong>feed</strong> for the podcast resource";
-		// }
 	}
 
-	//PARTIAL update
+	// PARTIAL update
 	@POST
-	@Path("{id}")	
+	@Path("{id}")
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Produces({ MediaType.TEXT_HTML })
-	public Response partialUpdatePodcast(@PathParam("id") Long id, Podcast podcast) throws AppException {
-		//resource is existent and a full update should occur 
+	public Response partialUpdatePodcast(@PathParam("id") Long id,
+			Podcast podcast) throws AppException {
 		podcast.setId(id);
 		podcastService.updatePartiallyPodcast(podcast);
-		return Response.status(Response.Status.OK)// 200
+		return Response
+				.status(Response.Status.OK)
+				// 200
 				.entity("The podcast you specified has been successfully updated")
-				.build();	
+				.build();
 	}
-	
+
 	/*
 	 * *********************************** DELETE ***********************************
 	 */
@@ -243,7 +229,6 @@ public class PodcastResource {
 
 	@DELETE
 	@Produces({ MediaType.TEXT_HTML })
-	@Transactional
 	public Response deletePodcasts() {
 		podcastService.deletePodcasts();
 		return Response.status(Response.Status.NO_CONTENT)// 204
