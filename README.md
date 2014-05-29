@@ -35,3 +35,8 @@ OR
 ## Go to blog post
 
 ## Changelog
+
+## License
+
+[MIT](https://github.com/Codingpedia/demo-rest-jersey-spring/blob/master/LICENSE) &copy; [Codingpedia.org](http://www.codingpedia.org)
+
