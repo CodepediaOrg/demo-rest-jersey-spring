@@ -14,7 +14,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -58,8 +57,7 @@ public class PodcastsResource {
 	@Produces({ MediaType.TEXT_HTML })
 	public Response createPodcast(Podcast podcast) throws AppException {
 		Long createPodcastId = podcastService.createPodcast(podcast);
-		return Response.status(Response.Status.CREATED)
-				// 201
+		return Response.status(Response.Status.CREATED)// 201
 				.entity("A new podcast has been created")
 				.header("Location",
 						"http://localhost:8888/demo-rest-jersey-spring/podcasts/"
@@ -92,8 +90,7 @@ public class PodcastsResource {
 		Long createPodcastid = podcastService.createPodcast(podcast);
 
 		return Response
-				.status(Response.Status.CREATED)
-				// 201
+				.status(Response.Status.CREATED)// 201
 				.entity("A new podcast/resource has been created at /demo-rest-jersey-spring/podcasts/"
 						+ createPodcastid)
 				.header("Location",
@@ -147,10 +144,26 @@ public class PodcastsResource {
 	public Response getPodcastById(@PathParam("id") Long id, @QueryParam("detailed") boolean detailed)
 			throws IOException,	AppException {
 		Podcast podcastById = podcastService.getPodcastById(id);
-		return Response.status(200).entity(new GenericEntity<Podcast>(podcastById) {}, detailed ? new Annotation[]{PodcastDetailedView.Factory.get()} : new Annotation[0])
+		return Response.status(200)
+				.entity(podcastById, detailed ? new Annotation[]{PodcastDetailedView.Factory.get()} : new Annotation[0])
 				.header("Access-Control-Allow-Headers", "X-extra-header")
 				.allow("OPTIONS").build();
 	}
+	
+//	@GET
+//	@Path("{id}")
+//	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+//	@PodcastDetailedView
+//	public Podcast getPodcastById(@PathParam("id") Long id, @QueryParam("detailed") boolean detailed)
+//			throws IOException,	AppException {
+//		Podcast podcastById = podcastService.getPodcastById(id);
+//		
+//		return podcastById;
+////		return Response.status(200)
+////				.entity(podcastById, detailed ? new Annotation[]{PodcastDetailedView.Factory.get()} : new Annotation[0])
+////				.header("Access-Control-Allow-Headers", "X-extra-header")
+////				.allow("OPTIONS").build();
+//	}	
 
 	/*
 	 * *********************************** UPDATE ***********************************
