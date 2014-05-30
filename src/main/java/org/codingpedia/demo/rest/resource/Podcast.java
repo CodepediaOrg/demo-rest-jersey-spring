@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
@@ -15,13 +17,14 @@ import org.codingpedia.demo.rest.helpers.CustomJsonDateDeserializer;
 import org.codingpedia.demo.rest.helpers.CustomJsonDateSerializer;
 
 /**
- * Podcast resource placeholder 
+ * Podcast resource placeholder for json/xml representation 
  * 
  * @author ama
  *
  */
 @SuppressWarnings("restriction")
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Podcast implements Serializable {
 
 	private static final long serialVersionUID = -8039686696076337053L;
@@ -49,7 +52,8 @@ public class Podcast implements Serializable {
 	/** insertion date in the database */
 	@JsonSerialize(using = CustomJsonDateSerializer.class)
 	@JsonDeserialize(using = CustomJsonDateDeserializer.class)	
-	@XmlElement(name = "insertionDate")	
+	@XmlElement(name = "insertionDate")
+	@PodcastDetailedView
 	private Date insertionDate;
 
 	public Podcast(PodcastEntity podcastEntity){
@@ -116,7 +120,7 @@ public class Podcast implements Serializable {
 	public void setFeed(String feed) {
 		this.feed = feed;
 	}
-
+	
 	public Date getInsertionDate() {
 		return insertionDate;
 	}

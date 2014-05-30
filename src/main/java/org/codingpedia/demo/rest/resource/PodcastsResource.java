@@ -1,6 +1,7 @@
 package org.codingpedia.demo.rest.resource;
 
 import java.io.IOException;
+import java.lang.annotation.Annotation;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -13,6 +14,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -142,11 +144,11 @@ public class PodcastsResource {
 	@GET
 	@Path("{id}")
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response getPodcastById(@PathParam("id") Long id)
+	public Response getPodcastById(@PathParam("id") Long id, @QueryParam("detailed") boolean detailed)
 			throws JsonGenerationException, JsonMappingException, IOException,
 			AppException {
 		Podcast podcastById = podcastService.getPodcastById(id);
-		return Response.status(200).entity(podcastById)
+		return Response.status(200).entity(new GenericEntity<Podcast>(podcastById) {}, detailed ? new Annotation[]{PodcastDetailedView.Factory.get()} : new Annotation[0])
 				.header("Access-Control-Allow-Headers", "X-extra-header")
 				.allow("OPTIONS").build();
 	}
