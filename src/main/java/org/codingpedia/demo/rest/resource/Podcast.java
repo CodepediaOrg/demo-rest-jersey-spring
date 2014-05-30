@@ -8,13 +8,11 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.beanutils.BeanUtils;
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codingpedia.demo.rest.dao.PodcastEntity;
-import org.codingpedia.demo.rest.helpers.CustomJsonDateDeserializer;
-import org.codingpedia.demo.rest.helpers.CustomJsonDateSerializer;
+import org.codingpedia.demo.rest.helpers.DateISO8601Adapter;
 
 /**
  * Podcast resource placeholder for json/xml representation 
@@ -50,9 +48,8 @@ public class Podcast implements Serializable {
 	private String description; 
 		
 	/** insertion date in the database */
-	@JsonSerialize(using = CustomJsonDateSerializer.class)
-	@JsonDeserialize(using = CustomJsonDateDeserializer.class)	
 	@XmlElement(name = "insertionDate")
+	@XmlJavaTypeAdapter(DateISO8601Adapter.class)	
 	@PodcastDetailedView
 	private Date insertionDate;
 

@@ -18,13 +18,14 @@ import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.map.JsonMappingException;
 import org.codingpedia.demo.rest.errorhandling.AppException;
 import org.codingpedia.demo.rest.service.PodcastService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 
 /**
  * 
@@ -134,8 +135,7 @@ public class PodcastsResource {
 	public List<Podcast> getPodcasts(
 			@QueryParam("orderByInsertionDate") String orderByInsertionDate,
 			@QueryParam("numberDaysToLookBack") Integer numberDaysToLookBack)
-			throws JsonGenerationException, JsonMappingException, IOException,
-			AppException {
+			throws IOException,	AppException {
 		List<Podcast> podcasts = podcastService.getPodcasts(
 				orderByInsertionDate, numberDaysToLookBack);
 		return podcasts;
@@ -145,8 +145,7 @@ public class PodcastsResource {
 	@Path("{id}")
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response getPodcastById(@PathParam("id") Long id, @QueryParam("detailed") boolean detailed)
-			throws JsonGenerationException, JsonMappingException, IOException,
-			AppException {
+			throws IOException,	AppException {
 		Podcast podcastById = podcastService.getPodcastById(id);
 		return Response.status(200).entity(new GenericEntity<Podcast>(podcastById) {}, detailed ? new Annotation[]{PodcastDetailedView.Factory.get()} : new Annotation[0])
 				.header("Access-Control-Allow-Headers", "X-extra-header")
