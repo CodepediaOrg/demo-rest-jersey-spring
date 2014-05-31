@@ -36,7 +36,7 @@ OR
 - check out our [How to test REST API with SoapUI](http://youtu.be/XV7WW0bDy9c) video tutorial on YouTube
 
 ## Go to blog post
-
+[Tutorial – REST API design and implementation in Java with Jersey and Spring](http://www.codingpedia.org/ama/tutorial-rest-api-design-and-implementation-in-java-with-jersey-and-spring/) - complete explanation of this implementation. 
 ## Changelog
 
 ## License
