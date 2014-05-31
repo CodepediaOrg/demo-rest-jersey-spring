@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.codingpedia</groupId>
 	<artifactId>demo-rest-jersey-spring</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<packaging>war</packaging>
 	<name>DemoRestWS</name>
 	<description>Example of building REST web services with spring, jersey and jpa2/hibernate</description>

@@ -75,9 +75,8 @@ public class Podcast implements Serializable {
 		
 	}
 	
-	public Podcast(){
+	public Podcast(){}
 		
-	}
 	public String getTitle() {
 		return title;
 	}
