@@ -15,16 +15,16 @@
   * `mvn clean install jetty:run  -Djetty.port=8888 -DskipTests=true`
   * now the REST api is up and running with Jetty on `localhost:8888` 
   
-**Note:** you could run a similar configuration from Eclipse if you have the m2e plugin installed - see pic below
+> **Note:** you could run a similar configuration from Eclipse if you have the m2e plugin installed - see pic below
 
-**Note:** after you `mvn install` the application, you can deploy the generated __.war__ file in any web container like Tomcat for example. 
+> **Note:** after you `mvn install` the application, you can deploy the generated __.war__ file in any web container like Tomcat for example. 
 
 ## Testing the project 
 
 ### From Maven (failsafe plugin)
 Run the following maven command on the console in the root directory of the project 
   
-  `mvn clean install verify -Djetty.port=8888`
+  ```mvn clean install verify -Djetty.port=8888```
 
 OR
   
