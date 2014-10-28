@@ -3,6 +3,7 @@ package org.codingpedia.demo.rest.service;
 import java.util.List;
 
 import org.codingpedia.demo.rest.errorhandling.AppException;
+import org.codingpedia.demo.rest.errorhandling.CustomReasonPhraseException;
 import org.codingpedia.demo.rest.resource.Podcast;
 
 /**
@@ -71,6 +72,12 @@ public interface PodcastService {
 	/*
 	 * ******************** Helper methods **********************
 	 * */
-	public Podcast verifyPodcastExistenceById(Long id);			
+	public Podcast verifyPodcastExistenceById(Long id);
+	
+	/**
+	 * Empty method generating a Business Exception
+	 * @throws CustomReasonPhraseException
+	 */
+	public void generateCustomReasonPhraseException() throws CustomReasonPhraseException;
 
 }

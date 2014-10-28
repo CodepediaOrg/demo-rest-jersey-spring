@@ -3,6 +3,7 @@ package org.codingpedia.demo.rest;
 import java.lang.annotation.Annotation;
 
 import org.codingpedia.demo.rest.errorhandling.AppExceptionMapper;
+import org.codingpedia.demo.rest.errorhandling.CustomReasonPhraseExceptionMapper;
 import org.codingpedia.demo.rest.errorhandling.GenericExceptionMapper;
 import org.codingpedia.demo.rest.errorhandling.NotFoundExceptionMapper;
 import org.codingpedia.demo.rest.filters.CORSResponseFilter;
@@ -42,6 +43,7 @@ public class RestDemoJaxRsApplication extends ResourceConfig {
 //		// register exception mappers
 //		register(GenericExceptionMapper.class);
 //		register(AppExceptionMapper.class);
+//      register(CustomReasonPhraseExceptionMapper.class);
 //		register(NotFoundExceptionMapper.class);
 //
 //		// register features
