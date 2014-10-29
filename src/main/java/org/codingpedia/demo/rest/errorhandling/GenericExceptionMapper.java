@@ -7,13 +7,13 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
+import javax.ws.rs.ext.Provider;
 
 import org.codingpedia.demo.rest.filters.AppConstants;
 
+@Provider
 public class GenericExceptionMapper implements ExceptionMapper<Throwable> {
  
-
-	
 	public Response toResponse(Throwable ex) {
 		
 		ErrorMessage errorMessage = new ErrorMessage();		
