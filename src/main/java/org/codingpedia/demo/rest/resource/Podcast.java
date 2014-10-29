@@ -45,6 +45,7 @@ public class Podcast implements Serializable {
 	
 	/** description of the podcast */
 	@XmlElement(name = "description")
+	@PodcastDetailedView	
 	private String description; 
 		
 	/** insertion date in the database */

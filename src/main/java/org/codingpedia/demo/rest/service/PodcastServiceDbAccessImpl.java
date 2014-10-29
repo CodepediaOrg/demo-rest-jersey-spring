@@ -10,6 +10,7 @@ import org.apache.commons.beanutils.BeanUtilsBean;
 import org.codingpedia.demo.rest.dao.PodcastDao;
 import org.codingpedia.demo.rest.dao.PodcastEntity;
 import org.codingpedia.demo.rest.errorhandling.AppException;
+import org.codingpedia.demo.rest.errorhandling.CustomReasonPhraseException;
 import org.codingpedia.demo.rest.filters.AppConstants;
 import org.codingpedia.demo.rest.helpers.NullAwareBeanUtilsBean;
 import org.codingpedia.demo.rest.resource.Podcast;
@@ -207,6 +208,11 @@ public class PodcastServiceDbAccessImpl implements PodcastService {
 			e.printStackTrace();
 		}
 		
+	}
+
+	@Override
+	public void generateCustomReasonPhraseException() throws CustomReasonPhraseException {		
+		throw new CustomReasonPhraseException(4000, "message attached to the Custom Reason Phrase Exception");		
 	}
 	
 }
