@@ -18,6 +18,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.codingpedia.demo.rest.errorhandling.AppException;
+import org.codingpedia.demo.rest.interceptors.Compress;
 import org.codingpedia.demo.rest.service.PodcastService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -128,6 +129,7 @@ public class PodcastsResource {
 	 * @throws AppException
 	 */
 	@GET
+	@Compress
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public List<Podcast> getPodcasts(
 			@QueryParam("orderByInsertionDate") String orderByInsertionDate,
