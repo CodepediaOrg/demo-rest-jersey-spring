@@ -18,7 +18,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.codingpedia.demo.rest.errorhandling.AppException;
-import org.codingpedia.demo.rest.interceptors.Compress;
 import org.codingpedia.demo.rest.service.PodcastService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -129,7 +128,7 @@ public class PodcastsResource {
 	 * @throws AppException
 	 */
 	@GET
-	@Compress
+	//@Compress //can be used only if you want to SELECTIVELY enable compression at the method level. By using the EncodingFilter everything is compressed now. 
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public List<Podcast> getPodcasts(
 			@QueryParam("orderByInsertionDate") String orderByInsertionDate,

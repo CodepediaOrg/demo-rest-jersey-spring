@@ -10,6 +10,14 @@ import javax.ws.rs.ext.Provider;
 import javax.ws.rs.ext.WriterInterceptor;
 import javax.ws.rs.ext.WriterInterceptorContext;
 
+
+/**
+ * 
+ * The jersey framework has a built-in functionality to easily enable content encoding.
+ * The functionality can be activated by the following code line <code>EncodingFilter.enableFor(ResourceConfig rc, GZipEncoder.class)</code>
+ * 
+ * You can use this <code>WriterInterceptor</code> to <b>selectively</b> compress responses on the method level. 
+ */
 @Provider
 @Compress
 public class GZIPWriterInterceptor implements WriterInterceptor {

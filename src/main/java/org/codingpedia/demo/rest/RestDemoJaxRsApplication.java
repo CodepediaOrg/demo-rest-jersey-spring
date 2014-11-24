@@ -1,7 +1,9 @@
 package org.codingpedia.demo.rest;
 
+import org.glassfish.jersey.message.GZipEncoder;
 import org.glassfish.jersey.message.filtering.EntityFilteringFeature;
 import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.server.filter.EncodingFilter;
 
 /**
  * Registers the components to be used by the JAX-RS application
@@ -36,6 +38,7 @@ public class RestDemoJaxRsApplication extends ResourceConfig {
 //		// register features
 //		register(JacksonFeature.class);
 		register(EntityFilteringFeature.class);
+		EncodingFilter.enableFor(this, GZipEncoder.class);		
 		
 //		property(EntityFilteringFeature.ENTITY_FILTERING_SCOPE, new Annotation[] {PodcastDetailedView.Factory.get()});
 	}
