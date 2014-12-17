@@ -78,7 +78,6 @@ public class PodcastsResource {
 	@POST
 	@Consumes({ MediaType.APPLICATION_FORM_URLENCODED })
 	@Produces({ MediaType.TEXT_HTML })
-	@Transactional
 	public Response createPodcastFromApplicationFormURLencoded(
 			@FormParam("title") String title,
 			@FormParam("linkOnPodcastpedia") String linkOnPodcastpedia,
