@@ -13,7 +13,7 @@
 		<jersey.version>2.9</jersey.version>
 		<jackson.version>1.9.13</jackson.version>
 		<hibernate.version>4.2.7.Final</hibernate.version>
-		<jetty.version>9.0.7.v20131107</jetty.version> <!-- Adapt this to a version found on http://repo.maven.apache.org/maven2/org/eclipse/jetty/jetty-maven-plugin/ -->
+		<jetty.maven.plugin.version>9.2.6.v20141205</jetty.maven.plugin.version> <!-- Adapt this to a version found on http://repo.maven.apache.org/maven2/org/eclipse/jetty/jetty-maven-plugin/ -->
 		<logback.version>1.1.1</logback.version>
 		<jcloverslf4j.version>1.7.6</jcloverslf4j.version>
 	</properties>
@@ -227,7 +227,7 @@
 			<plugin>
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
-				<version>${jetty.version}</version>
+				<version>${jetty.maven.plugin.version}</version>
 				<configuration>
 					<jettyConfig>${project.basedir}/src/main/resources/config/jetty9.xml</jettyConfig>
 					<stopKey>STOP</stopKey>
