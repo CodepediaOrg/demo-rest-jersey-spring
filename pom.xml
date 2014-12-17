@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.codingpedia</groupId>
 	<artifactId>demo-rest-jersey-spring</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>DemoRestWS</name>
 	<description>Example of building REST web services with spring, jersey and jpa2/hibernate</description>
@@ -25,7 +25,12 @@
 			<url>http://download.java.net/maven/2/</url>
 		</repository>
 	</repositories>
-
+	
+	<scm>
+		<developerConnection>scm:svn:https://github.com/Codingpedia/demo-rest-jersey-spring.git</developerConnection>
+		<url>https://github.com/Codingpedia/demo-rest-jersey-spring</url>
+	</scm>
+	
 	<dependencies>
 		<!-- Jersey-Spring http://mvnrepository.com/artifact/org.glassfish.jersey.ext/jersey-spring3/2.4.1 -->
 		<dependency>
@@ -169,6 +174,11 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.10.8</version>
+		</dependency>		
+		<dependency>
 			<groupId>org.glassfish.jersey.test-framework.providers</groupId>
 			<artifactId>jersey-test-framework-provider-external</artifactId>
 			<version>2.5.1</version>
@@ -224,6 +234,25 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.5.1</version>
+				<configuration>
+					<providerImplementations>
+						<git>jgit</git>
+					</providerImplementations>
+					<tagBase>https://github.com/Codingpedia/demo-rest-jersey-spring/releases</tagBase>
+					<tagNameFormat>v@{project.version}</tagNameFormat>
+				</configuration>
+				<dependencies>
+					<dependency>
+				    	<groupId>org.apache.maven.scm</groupId>
+				    	<artifactId>maven-scm-provider-jgit</artifactId>
+				        <version>1.9.2</version>
+					</dependency>
+				</dependencies>				
+			</plugin>			
 			<plugin>
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
