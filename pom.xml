@@ -27,7 +27,7 @@
 	</repositories>
 	
 	<scm>
-		<developerConnection>scm:svn:https://github.com/Codingpedia/demo-rest-jersey-spring.git</developerConnection>
+		<developerConnection>scm:https://github.com/Codingpedia/demo-rest-jersey-spring.git</developerConnection>
 		<url>https://github.com/Codingpedia/demo-rest-jersey-spring</url>
 	</scm>
 	
