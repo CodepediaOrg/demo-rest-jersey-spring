@@ -214,5 +214,9 @@ public class PodcastServiceDbAccessImpl implements PodcastService {
 	public void generateCustomReasonPhraseException() throws CustomReasonPhraseException {		
 		throw new CustomReasonPhraseException(4000, "message attached to the Custom Reason Phrase Exception");		
 	}
-	
+
+	public void setPodcastDao(PodcastDao podcastDao) {
+		this.podcastDao = podcastDao;
+	}
+		
 }
