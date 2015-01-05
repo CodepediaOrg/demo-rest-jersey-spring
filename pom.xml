@@ -215,25 +215,15 @@
 
 	<build>
 		<plugins>
+		    <!-- use the plugin to generate customed war name -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>2.16</version>
-				<executions>
-					<execution>
-						<id>integration-test</id>
-						<goals>
-							<goal>integration-test</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>verify</id>
-						<goals>
-							<goal>verify</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<warName>${project.artifactId}</warName>
+				</configuration>
+			</plugin>		    
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-release-plugin</artifactId>
@@ -279,27 +269,161 @@
 						<version>5.1.27</version>
 					</dependency>
 				</dependencies>
-				<executions>
-					<execution>
-						<id>start-jetty</id>
-						<phase>pre-integration-test</phase>
-						<goals>
-							<goal>run-exploded</goal>
-						</goals>
-						<configuration>
-							<scanIntervalSeconds>0</scanIntervalSeconds>
-							<daemon>true</daemon>
-						</configuration>
-					</execution>
-					<execution>
-						<id>stop-jetty</id>
-						<phase>post-integration-test</phase>
-						<goals>
-							<goal>stop</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>
+				
+    <profiles>
+        <profile>
+            <id>failsafeTestRunner</id>	
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-failsafe-plugin</artifactId>
+						<version>2.16</version>
+						<executions>
+							<execution>
+								<id>integration-test</id>
+								<goals>
+									<goal>integration-test</goal>
+								</goals>
+							</execution>
+							<execution>
+								<id>verify</id>
+								<goals>
+									<goal>verify</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>		
+					<plugin>
+						<groupId>org.eclipse.jetty</groupId>
+						<artifactId>jetty-maven-plugin</artifactId>
+						<version>${jetty.maven.plugin.version}</version>
+						<configuration>
+							<jettyConfig>${project.basedir}/src/main/resources/config/jetty9.xml</jettyConfig>
+							<stopKey>STOP</stopKey>
+							<stopPort>9999</stopPort>
+							<stopWait>5</stopWait>
+							<scanIntervalSeconds>5</scanIntervalSeconds>
+							<scanTargets>
+								<scanTarget>${project.basedir}/src/main</scanTarget>
+								<scanTarget>${project.basedir}/src/test</scanTarget>
+							</scanTargets>
+							<contextXml>${project.basedir}/src/test/resources/jetty-context.xml</contextXml>
+							<webAppConfig>
+								<contextPath>/${project.artifactId}</contextPath>
+							</webAppConfig>
+						</configuration>
+						<dependencies>
+							<dependency>
+								<groupId>mysql</groupId>
+								<artifactId>mysql-connector-java</artifactId>
+								<version>5.1.27</version>
+							</dependency>
+						</dependencies>
+						<executions>
+							<execution>
+								<id>start-jetty</id>
+								<phase>pre-integration-test</phase>
+								<goals>
+									<goal>run-exploded</goal>
+								</goals>
+								<configuration>
+									<scanIntervalSeconds>0</scanIntervalSeconds>
+									<daemon>true</daemon>
+								</configuration>
+							</execution>
+							<execution>
+								<id>stop-jetty</id>
+								<phase>post-integration-test</phase>
+								<goals>
+									<goal>stop</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		
+        <!-- profile to run soapui integration tests against the "local" jetty started on local machine -->
+        <profile>
+            <id>soapuiTestRunner-local-jetty</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.smartbear.soapui</groupId>
+                        <artifactId>soapui-maven-plugin</artifactId>
+                        <version>5.0.0</version>
+                        <executions>
+                            <execution>
+                                <phase>test</phase>
+                                <goals>
+                                    <goal>test</goal>
+                                </goals>
+                                <configuration>
+                                    <projectFile>${project.basedir}/src/test/resources/soapui/Test-Demo-REST-Jersey-with-Spring-soapui-project.xml
+                                    </projectFile>
+                                    <outputFolder>${project.build.directory}\soapui-logs\test-results</outputFolder>                                         
+                                    <projectProperties>
+                                        <value>baseUrl=http://localhost:8888</value>
+                                    </projectProperties>
+                                    <!-- specify where to  put the soapui generated log files-->
+									<soapuiProperties>
+										<property>
+											<name>soapui.logroot</name>
+											<value>${project.build.directory}/soapui-logs/</value>
+										</property>
+									</soapuiProperties>                                    
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <!-- profile to run soapui integration tests against the "development" machine. Here I have a local tomcat instance, and but in 
+        a continuous integration environment, you could start the integration tests after the deployment job has been finished -->
+        <profile>
+            <id>soapuiTestRunner-dev-tomcat</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.smartbear.soapui</groupId>
+                        <artifactId>soapui-maven-plugin</artifactId>
+                        <version>5.0.0</version>
+                        <executions>
+                            <execution>
+                                <!--Run as part of the test phase in the Maven lifecycle-->
+                                <phase>test</phase>
+                                <goals>
+                                    <!--Run the test phase of com.smartbear.soapui:maven-soapui-plugin-->
+                                    <goal>test</goal>
+                                </goals>
+                                <configuration>
+                                    <projectFile>${project.basedir}/src/test/resources/soapui/Test-Demo-REST-Jersey-with-Spring-soapui-project.xml
+                                    </projectFile>
+                                    <outputFolder>${project.build.directory}\soapui-logs\test-results</outputFolder>                                    
+                                    <projectProperties>
+                                        <value>baseUrl=http://localhost:8080</value>
+                                    </projectProperties>
+                                    <junitReport>true</junitReport>
+                                     <!-- specify where to  put the soapui generated log files-->
+									<soapuiProperties>
+										<property>
+											<name>soapui.logroot</name>
+											<value>${project.build.directory}/soapui-logs/</value>
+										</property>
+									</soapuiProperties>                                    
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>        		
+	</profiles>                		
+	    	
 </project>  
