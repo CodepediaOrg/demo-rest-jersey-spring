@@ -13,7 +13,7 @@ import org.codingpedia.demo.rest.errorhandling.AppException;
 import org.codingpedia.demo.rest.errorhandling.CustomReasonPhraseException;
 import org.codingpedia.demo.rest.filters.AppConstants;
 import org.codingpedia.demo.rest.helpers.NullAwareBeanUtilsBean;
-import org.codingpedia.demo.rest.resource.Podcast;
+import org.codingpedia.demo.rest.resource.podcast.Podcast;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 

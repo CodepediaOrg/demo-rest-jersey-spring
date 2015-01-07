@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.apache.commons.beanutils.BeanUtils;
-import org.codingpedia.demo.rest.resource.Podcast;
+import org.codingpedia.demo.rest.resource.podcast.Podcast;
 
 /**
  * Podcast entity 

@@ -1,4 +1,4 @@
-package org.codingpedia.demo.rest.resource;
+package org.codingpedia.demo.rest.resource.podcast;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;

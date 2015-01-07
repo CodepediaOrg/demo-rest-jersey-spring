@@ -5,7 +5,7 @@ import static org.mockito.Mockito.*;
 import org.codingpedia.demo.rest.dao.PodcastDao;
 import org.codingpedia.demo.rest.dao.PodcastEntity;
 import org.codingpedia.demo.rest.errorhandling.AppException;
-import org.codingpedia.demo.rest.resource.Podcast;
+import org.codingpedia.demo.rest.resource.podcast.Podcast;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;

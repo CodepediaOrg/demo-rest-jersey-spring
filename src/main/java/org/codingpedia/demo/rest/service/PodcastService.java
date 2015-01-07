@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.codingpedia.demo.rest.errorhandling.AppException;
 import org.codingpedia.demo.rest.errorhandling.CustomReasonPhraseException;
-import org.codingpedia.demo.rest.resource.Podcast;
+import org.codingpedia.demo.rest.resource.podcast.Podcast;
 
 /**
  * 

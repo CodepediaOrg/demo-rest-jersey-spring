@@ -1,4 +1,4 @@
-package org.codingpedia.demo.rest.resource;
+package org.codingpedia.demo.rest.resource.podcast;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
