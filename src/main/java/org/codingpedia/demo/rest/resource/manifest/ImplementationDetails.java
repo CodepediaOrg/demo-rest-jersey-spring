@@ -1,14 +1,14 @@
-package org.codingpedia.demo.rest.resource.version;
+package org.codingpedia.demo.rest.resource.manifest;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class VersionResponse {
+@XmlAccessorType(XmlAccessType.FIELD)
+public class ImplementationDetails {
 
-//	Implementation-Title: DemoRestWS
-//	Implementation-Version: 0.0.1-SNAPSHOT
-//	Implementation-Vendor-Id: org.codingpedia
 	@XmlElement(name = "implementationTitle")	
 	String implementationTitle;
 

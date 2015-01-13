@@ -52,7 +52,7 @@
     <bean id="podcastsResource" class="org.codingpedia.demo.rest.resource.podcast.PodcastsResource" />
     <bean id="podcastLegacyResource" class="org.codingpedia.demo.rest.resource.podcast.PodcastLegacyResource" />
     
-    <bean id="versionService" class="org.codingpedia.demo.rest.resource.version.VersionService" />
+    <bean id="versionService" class="org.codingpedia.demo.rest.resource.manifest.ManifestService" />
     
 	<bean id="restDemoDS" class="org.springframework.jndi.JndiObjectFactoryBean" scope="singleton">
 	    <property name="jndiName" value="java:comp/env/jdbc/restDemoDB" />
