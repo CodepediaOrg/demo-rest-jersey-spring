@@ -23,7 +23,7 @@ public class PodcastServiceDbAccessImpl implements PodcastService {
 	PodcastDao podcastDao;
 		
 	/********************* Create related methods implementation ***********************/
-	@Transactional
+	@Transactional("transactionManager")
 	public Long createPodcast(Podcast podcast) throws AppException {
 		
 		validateInputForCreation(podcast);
@@ -50,7 +50,7 @@ public class PodcastServiceDbAccessImpl implements PodcastService {
 		//etc...
 	}
 	
-	@Transactional
+	@Transactional("transactionManager")
 	public void createPodcasts(List<Podcast> podcasts) throws AppException {
 		for (Podcast podcast : podcasts) {
 			createPodcast(podcast);
@@ -121,7 +121,7 @@ public class PodcastServiceDbAccessImpl implements PodcastService {
 	
 	
 	/********************* UPDATE-related methods implementation ***********************/	
-	@Transactional
+	@Transactional("transactionManager")
 	public void updateFullyPodcast(Podcast podcast) throws AppException {
 		//do a validation to verify FULL update with PUT
 		if(isFullUpdate(podcast)){
@@ -159,12 +159,12 @@ public class PodcastServiceDbAccessImpl implements PodcastService {
 	}
 	
 	/********************* DELETE-related methods implementation ***********************/
-	@Transactional
+	@Transactional("transactionManager")
 	public void deletePodcastById(Long id) {
 		podcastDao.deletePodcastById(id);
 	}
 	
-	@Transactional	
+	@Transactional("transactionManager")	
 	public void deletePodcasts() {
 		podcastDao.deletePodcasts();		
 	}
@@ -178,7 +178,7 @@ public class PodcastServiceDbAccessImpl implements PodcastService {
 		}
 	}
 
-	@Transactional
+	@Transactional("transactionManager")
 	public void updatePartiallyPodcast(Podcast podcast) throws AppException {
 		//do a validation to verify existence of the resource		
 		Podcast verifyPodcastExistenceById = verifyPodcastExistenceById(podcast.getId());

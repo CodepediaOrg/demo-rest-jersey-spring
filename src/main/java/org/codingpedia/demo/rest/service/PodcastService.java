@@ -66,6 +66,7 @@ public interface PodcastService {
 	 * ******************** Delete related methods **********************
 	 * */
 	public void deletePodcastById(Long id);
+	
 	/** removes all podcasts */
 	public void deletePodcasts();
 

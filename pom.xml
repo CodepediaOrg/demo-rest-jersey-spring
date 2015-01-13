@@ -9,8 +9,8 @@
 	<description>Example of building REST web services with spring, jersey and jpa2/hibernate</description>
 
 	<properties>
-		<spring.version>4.0.3.RELEASE</spring.version>
-		<jersey.version>2.9</jersey.version>
+		<spring.version>4.1.4.RELEASE</spring.version>
+		<jersey.version>2.14</jersey.version>
 		<jackson.version>1.9.13</jackson.version>
 		<hibernate.version>4.2.7.Final</hibernate.version>
 		<jetty.maven.plugin.version>9.2.6.v20141205</jetty.maven.plugin.version> <!-- Adapt this to a version found on http://repo.maven.apache.org/maven2/org/eclipse/jetty/jetty-maven-plugin/ -->
@@ -232,6 +232,7 @@
 			        <archive>
 			            <manifest>
 			                <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+			                <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
 			            </manifest>
 			        </archive>					
 				</configuration>
