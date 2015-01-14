@@ -11,10 +11,10 @@
 	</appender>
 
   	<appender name="dailyRollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<File>c:/tmp/rest-demo.log</File>
+		<File>c:/tmp/rest-demo/rest-demo.log</File>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 		    <!-- daily rollover -->
-			<FileNamePattern>rest-demo.%d{yyyy-MM-dd}.log</FileNamePattern>
+			<FileNamePattern>c:/tmp/rest-demo/archive/rest-demo.%d{yyyy-MM-dd}.log</FileNamePattern>
 			
 			<!-- keep 30 days' worth of history -->
 			<maxHistory>30</maxHistory>			
@@ -27,14 +27,14 @@
   	<appender name="minuteRollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 		    <!-- rollover every minute -->
-			<FileNamePattern>c:/tmp/minutes/rest-demo-minute.%d{yyyy-MM-dd_HH-mm}.log</FileNamePattern>
+			<FileNamePattern>c:/tmp/rest-demo/archive/minutes/rest-demo-minute.%d{yyyy-MM-dd_HH-mm}.log</FileNamePattern>
 			
-			<!-- keep 30 days' worth of history -->
-			<maxHistory>30</maxHistory>			
+			<!-- keep 1 day worth of history -->
+			<maxHistory>1</maxHistory>			
 		</rollingPolicy>
  
 		<encoder>
-			<Pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</Pattern>
+			<Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg %n</Pattern>
 		</encoder> 	    
   	</appender>  	
   		
