@@ -10,6 +10,7 @@
 
 	<properties>
 		<spring.version>4.1.4.RELEASE</spring.version>
+		<spring.security.version>3.2.5.RELEASE</spring.security.version>
 		<jersey.version>2.14</jersey.version>
 		<jackson.version>1.9.13</jackson.version>
 		<hibernate.version>4.2.7.Final</hibernate.version>
@@ -109,7 +110,23 @@
 			<artifactId>spring-orm</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-
+		<!-- Spring security -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+ 		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+ 		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+		
 		<!-- MySQL JDBC connector -->
 		<dependency>
 			<groupId>mysql</groupId>
@@ -270,7 +287,8 @@
 				<artifactId>jetty-maven-plugin</artifactId>
 				<version>${jetty.maven.plugin.version}</version>
 				<configuration>
-					<jettyConfig>${project.basedir}/src/main/resources/config/jetty9.xml</jettyConfig>
+					<jettyXml>${project.basedir}/src/main/resources/config/jetty9.xml</jettyXml>
+					<!-- ,${project.basedir}/src/main/resources/config/jetty-ssl.xml, ${project.basedir}/src/main/resources/config/jetty-https.xml -->
 					<stopKey>STOP</stopKey>
 					<stopPort>9999</stopPort>
 					<stopWait>5</stopWait>
@@ -406,6 +424,7 @@
                 </plugins>
             </build>
         </profile>
+        
         <!-- profile to run soapui integration tests against the "development" machine. Here I have a local tomcat instance, and but in 
         a continuous integration environment, you could start the integration tests after the deployment job has been finished -->
         <profile>

@@ -12,11 +12,14 @@
 	
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:spring/applicationContext.xml</param-value>
+		<param-value>
+		    classpath:spring/applicationContext.xml
+		    classpath:spring/security-context.xml
+		</param-value>
 	</context-param>
  
 	<servlet>
-		<servlet-name>jersey-serlvet</servlet-name>
+		<servlet-name>jersey-servlet</servlet-name>
 		<servlet-class>
 			org.glassfish.jersey.servlet.ServletContainer
 		</servlet-class>
@@ -28,10 +31,21 @@
 	</servlet>
  
 	<servlet-mapping>
-		<servlet-name>jersey-serlvet</servlet-name>
+		<servlet-name>jersey-servlet</servlet-name>
 		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
- 
+	
+    <!--Hook into spring security-->
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+
+    <filter-mapping>
+      <filter-name>springSecurityFilterChain</filter-name>
+      <url-pattern>/manifest/*</url-pattern>
+    </filter-mapping>	
+     
 	<resource-ref>
         <description>Database resource for rest demo web application </description>
         <res-ref-name>jdbc/restDemoDB</res-ref-name>
